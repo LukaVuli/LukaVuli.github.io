@@ -85,8 +85,8 @@
         }
 
         .profile-photo {
-            width: 160px;
-            height: 200px;
+            width: 320px;
+            height: 400px;
             border-radius: 8px;
             object-fit: cover;
             object-position: center top;
@@ -95,8 +95,8 @@
         }
 
         .profile-photo-placeholder {
-            width: 160px;
-            height: 200px;
+            width: 320px;
+            height: 400px;
             border-radius: 8px;
             background: linear-gradient(135deg, var(--card-bg), var(--primary-dark));
             border: 2px solid var(--border-color);
@@ -424,6 +424,12 @@
             border-radius: 4px;
         }
 
+        .paper-card.entity-neutering .presentation-item {
+            background: rgba(248, 81, 73, 0.1);
+            color: var(--accent-red);
+        }
+
+
         /* ========================================
            MISC SECTION - Single column dropdowns with icons
            ======================================== */
@@ -650,8 +656,8 @@
             }
 
             .profile-photo, .profile-photo-placeholder {
-                width: 130px;
-                height: 165px;
+                width: 260px;
+                height: 330px;
             }
 
             .name-title h1 {
@@ -695,7 +701,7 @@
             </div>
 
             <p class="bio-text">
-                My research is at the intersection of asset pricing and econometrics. I currently have a keen focus on Large Language Models. By addressing methodological challenges associated with using LLMs—such as lookahead bias and statistical inference—I seek to leverage LLMs to improve our understanding of financial markets, investor behavior, and the role of alternative data in asset pricing.
+                My research is at the intersection of asset pricing and econometrics. I am currently focused on Large Language Models and their impacts on financial markets. By addressing methodological challenges associated with using LLMs—such as lookahead bias and statistical inference—I seek to leverage LLMs to improve our understanding of financial markets, investor behavior, and the role of alternative data in asset pricing.
             </p>
 
             <div class="research-interests">
@@ -732,7 +738,6 @@
         </div>
 
         <div class="scroll-hint">
-            <span>Scroll for Research</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 5v14M19 12l-7 7-7-7"/>
             </svg>
@@ -742,7 +747,6 @@
     <!-- Research Section -->
     <section class="section" id="research">
         <h2 class="section-title">Working Papers</h2>
-        <p class="section-subtitle">Click to expand details</p>
 
         <div class="research-grid">
             <!-- Paper 1: Scaling Laws -->
@@ -752,7 +756,7 @@
                         <h3 class="paper-title">Compute, Complexity, and the Scaling Laws of Return Predictability</h3>
                         <div class="paper-meta">
                             <span class="paper-authors">with Allan Timmermann</span>
-                            <span class="paper-year">2025</span>
+                            <span class="paper-year">2026</span>
                         </div>
                     </div>
                     <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -810,13 +814,13 @@
 -->
 
             <!-- Paper 3: Entity Neutering -->
-            <article class="paper-card" onclick="togglePaper(this)">
+            <article class="paper-card entity-neutering" onclick="togglePaper(this)">
                 <div class="paper-header">
                     <div>
                         <h3 class="paper-title">Entity Neutering</h3>
                         <div class="paper-meta">
                             <span class="paper-authors">with Joseph Engelberg, Asaf Manela, & William Mullins</span>
-                            <span class="paper-year">2025</span>
+                            <span class="paper-year">2026</span>
                         </div>
                     </div>
                     <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -855,7 +859,6 @@
     <!-- Misc Section -->
     <section class="misc-section" id="misc">
         <h2 class="section-title">Miscellaneous</h2>
-        <p class="section-subtitle">Click to explore</p>
 
         <div class="misc-grid">
             <!-- Quotes -->
