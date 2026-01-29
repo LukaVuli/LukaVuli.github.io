@@ -1107,8 +1107,8 @@
 
         function initParticles() {
             particles = [];
-            // 25% more particles for denser network
-            const particleCount = Math.min(Math.floor((width * height) / 9500), 155);
+            // 125% more particles for denser network
+            const particleCount = Math.min(Math.floor((width * height) / 4222), 350);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
