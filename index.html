@@ -30,9 +30,7 @@
             --border-color: #30363d;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -42,40 +40,48 @@
             overflow-x: hidden;
         }
 
-        /* ========================================
-           PARTICLE CANVAS - FULL PAGE BACKGROUND
-           ======================================== */
         #particleCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
         }
 
         /* ========================================
-           HERO SECTION
+           MAIN WRAPPER - single page, centered
            ======================================== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .page-wrapper {
             position: relative;
             z-index: 1;
-            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 2rem 4rem;
         }
 
-        .hero-card {
+        /* ========================================
+           THE ONE CARD
+           ======================================== */
+        .main-card {
             background: rgba(18, 18, 26, 0.92);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 3rem;
-            max-width: 700px;
             width: 100%;
+            max-width: 760px;
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Clip inner card corners to the parent border-radius */
+        .main-card > :first-child { border-radius: 15px 15px 0 0; }
+        .main-card > :last-child { border-radius: 0 0 15px 15px; }
+
+        /* ========================================
+           HERO TOP SECTION (inside the card)
+           ======================================== */
+        .hero-top {
+            padding: 3rem 3rem 2rem;
         }
 
         .profile-section {
@@ -86,8 +92,8 @@
         }
 
         .profile-photo {
-            width: 320px;
-            height: 400px;
+            width: 280px;
+            height: 350px;
             border-radius: 8px;
             object-fit: cover;
             object-position: center top;
@@ -96,8 +102,8 @@
         }
 
         .profile-photo-placeholder {
-            width: 320px;
-            height: 400px;
+            width: 280px;
+            height: 350px;
             border-radius: 8px;
             background: linear-gradient(135deg, var(--card-bg), var(--primary-dark));
             border: 2px solid var(--border-color);
@@ -189,58 +195,34 @@
             background: rgba(88, 166, 255, 0.1);
         }
 
-        .contact-links svg {
-            width: 15px;
-            height: 15px;
-        }
+        .contact-links svg { width: 15px; height: 15px; }
 
-        /* Scroll indicator */
-        .scroll-hint {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            animation: pulse 2s infinite;
-            z-index: 10;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
+        /* ========================================
+           DIVIDER BETWEEN HERO AND SECTIONS
+           ======================================== */
+        .card-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 0 0;
         }
 
         /* ========================================
-           SECTIONS
+           INNER SECTIONS (papers, misc)
            ======================================== */
-        .section {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
+        .card-section {
+            padding: 2.5rem 3rem;
+        }
+
+        .card-section + .card-section {
+            border-top: 1px solid var(--border-color);
         }
 
         .section-title {
             font-family: 'Source Serif Pro', Georgia, serif;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 0.75rem;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
         }
 
         /* ========================================
@@ -249,14 +231,13 @@
         .research-grid {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1rem;
         }
 
         .paper-card {
-            background: rgba(26, 26, 36, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 15, 0.5);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -265,45 +246,45 @@
         .paper-card:hover {
             border-color: var(--accent-blue);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         .paper-header {
-            padding: 1.25rem 1.5rem;
+            padding: 1.1rem 1.25rem;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             gap: 1rem;
         }
 
+        .paper-header > div:first-child {
+            flex: 1;
+            min-width: 0;
+        }
+
         .paper-title {
             font-family: 'Source Serif Pro', Georgia, serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.35rem;
             transition: color 0.2s;
         }
 
-        .paper-card:hover .paper-title {
-            color: var(--accent-blue);
-        }
+        .paper-card:hover .paper-title { color: var(--accent-blue); }
 
         .paper-meta {
             display: flex;
-            gap: 0.75rem;
             align-items: center;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
         }
 
-        .paper-authors {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
+        .paper-authors { font-size: 0.82rem; color: var(--text-secondary); }
 
         .paper-year {
-            font-size: 0.75rem;
-            padding: 0.2rem 0.5rem;
+            font-size: 0.72rem;
+            padding: 0.18rem 0.45rem;
             background: rgba(88, 166, 255, 0.15);
             color: var(--accent-blue);
             border-radius: 4px;
@@ -315,35 +296,28 @@
             flex-shrink: 0;
         }
 
-        .paper-card:hover .expand-icon {
-            color: var(--accent-blue);
-        }
-
-        .paper-card.expanded .expand-icon {
-            transform: rotate(180deg);
-        }
+        .paper-card:hover .expand-icon { color: var(--accent-blue); }
+        .paper-card.expanded .expand-icon { transform: rotate(180deg); }
 
         .paper-details {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.2);
         }
 
-        .paper-card.expanded .paper-details {
-            max-height: 600px;
-        }
+        .paper-card.expanded .paper-details { max-height: 600px; }
 
         .paper-details-inner {
-            padding: 1.25rem 1.5rem;
+            padding: 1.1rem 1.25rem;
             border-top: 1px solid var(--border-color);
         }
 
         .paper-abstract {
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             color: var(--text-secondary);
             line-height: 1.7;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.1rem;
         }
 
         .paper-links {
@@ -356,59 +330,40 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             text-decoration: none;
-            padding: 0.4rem 0.75rem;
+            padding: 0.35rem 0.7rem;
             border-radius: 5px;
             transition: all 0.2s ease;
             font-weight: 500;
         }
 
-        .paper-link.pdf {
-            color: var(--accent-blue);
-            border: 1px solid var(--accent-blue);
-        }
-        .paper-link.pdf:hover {
-            background: var(--accent-blue);
-            color: var(--primary-dark);
-        }
+        .paper-link.pdf { color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+        .paper-link.pdf:hover { background: var(--accent-blue); color: var(--primary-dark); }
 
-        .paper-link.code {
-            color: var(--accent-purple);
-            border: 1px solid var(--accent-purple);
-        }
-        .paper-link.code:hover {
-            background: var(--accent-purple);
-            color: var(--primary-dark);
-        }
+        .paper-link.code { color: var(--accent-purple); border: 1px solid var(--accent-purple); }
+        .paper-link.code:hover { background: var(--accent-purple); color: var(--primary-dark); }
 
-        .paper-link.data {
-            color: var(--accent-green);
-            border: 1px solid var(--accent-green);
-        }
-        .paper-link.data:hover {
-            background: var(--accent-green);
-            color: var(--primary-dark);
-        }
+        .paper-link.data { color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .paper-link.data:hover { background: var(--accent-green); color: var(--primary-dark); }
 
-        .paper-link svg {
-            width: 14px;
-            height: 14px;
-        }
+        .paper-link.pypi { color: #f7c948; border: 1px solid #f7c948; }
+        .paper-link.pypi:hover { background: #f7c948; color: var(--primary-dark); }
 
-        /* Presentations badge */
+        .paper-link svg { width: 13px; height: 13px; }
+
         .presentations-badge {
-            margin-top: 1rem;
-            padding-top: 1rem;
+            margin-top: 0.9rem;
+            padding-top: 0.9rem;
             border-top: 1px dashed var(--border-color);
         }
 
         .presentations-badge h5 {
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--text-muted);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.45rem;
         }
 
         .presentation-list {
@@ -418,8 +373,8 @@
         }
 
         .presentation-item {
-            font-size: 0.72rem;
-            padding: 0.25rem 0.5rem;
+            font-size: 0.7rem;
+            padding: 0.22rem 0.45rem;
             background: rgba(163, 113, 247, 0.1);
             color: var(--accent-purple);
             border-radius: 4px;
@@ -430,29 +385,19 @@
             color: var(--accent-red);
         }
 
-
         /* ========================================
-           MISC SECTION - Single column dropdowns with icons
+           MISC CARDS
            ======================================== */
-        .misc-section {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
-        }
-
         .misc-grid {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1rem;
         }
 
         .misc-card {
-            background: rgba(26, 26, 36, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 15, 0.5);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -461,19 +406,19 @@
         .misc-card:hover {
             border-color: var(--accent-blue);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         .misc-card-header {
-            padding: 1.25rem 1.5rem;
+            padding: 1.1rem 1.25rem;
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
         .misc-card-icon {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -484,23 +429,17 @@
         .misc-card-icon.quotes { background: rgba(210, 153, 34, 0.15); color: var(--accent-gold); }
         .misc-card-icon.tech { background: rgba(163, 113, 247, 0.15); color: var(--accent-purple); }
         .misc-card-icon.econ { background: rgba(63, 185, 80, 0.15); color: var(--accent-green); }
-
-        .misc-card-icon svg {
-            width: 18px;
-            height: 18px;
-        }
+        .misc-card-icon svg { width: 17px; height: 17px; }
 
         .misc-card-title {
             font-family: 'Source Serif Pro', Georgia, serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--text-primary);
             transition: color 0.2s;
         }
 
-        .misc-card:hover .misc-card-title {
-            color: var(--accent-blue);
-        }
+        .misc-card:hover .misc-card-title { color: var(--accent-blue); }
 
         .misc-expand-icon {
             margin-left: auto;
@@ -509,99 +448,72 @@
             flex-shrink: 0;
         }
 
-        .misc-card:hover .misc-expand-icon {
-            color: var(--accent-blue);
-        }
-
-        .misc-card.expanded .misc-expand-icon {
-            transform: rotate(180deg);
-        }
+        .misc-card:hover .misc-expand-icon { color: var(--accent-blue); }
+        .misc-card.expanded .misc-expand-icon { transform: rotate(180deg); }
 
         .misc-card-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.2);
         }
 
-        .misc-card.expanded .misc-card-content {
-            max-height: 2000px;
-        }
+        .misc-card.expanded .misc-card-content { max-height: 2000px; }
 
         .misc-card-inner {
-            padding: 1.25rem 1.5rem;
+            padding: 1.1rem 1.25rem;
             border-top: 1px solid var(--border-color);
         }
 
-        .misc-intro {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.25rem;
-            font-style: italic;
-        }
-
         .reading-item, .quote-item, .tech-item {
-            margin-bottom: 1.25rem;
-            padding-bottom: 1.25rem;
+            margin-bottom: 1.1rem;
+            padding-bottom: 1.1rem;
             border-bottom: 1px solid rgba(48, 54, 61, 0.5);
         }
 
         .reading-item:last-child, .quote-item:last-child, .tech-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
+            margin-bottom: 0; padding-bottom: 0; border-bottom: none;
         }
 
         .reading-item h4, .tech-item h4 {
-            font-size: 0.92rem;
+            font-size: 0.88rem;
             color: var(--text-primary);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.35rem;
             font-weight: 600;
         }
 
-        .reading-item .tag {
-            font-size: 0.68rem;
-            padding: 0.15rem 0.4rem;
-            background: rgba(86, 212, 221, 0.15);
-            color: var(--accent-cyan);
-            border-radius: 3px;
-            margin-left: 0.5rem;
-            vertical-align: middle;
-        }
-
         .reading-item p, .tech-item p {
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             color: var(--text-secondary);
             line-height: 1.65;
         }
 
         .quote-item blockquote {
             font-family: 'Source Serif Pro', Georgia, serif;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: var(--text-primary);
             font-style: italic;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.45rem;
             padding-left: 1rem;
             border-left: 3px solid var(--accent-gold);
             line-height: 1.6;
         }
 
         .quote-item .attribution {
-            font-size: 0.8rem;
+            font-size: 0.77rem;
             color: var(--accent-gold);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.45rem;
         }
 
         .quote-item .commentary {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             line-height: 1.65;
         }
 
         .econ-essay {
             font-family: 'Source Serif Pro', Georgia, serif;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: var(--text-secondary);
             line-height: 1.8;
         }
@@ -610,37 +522,32 @@
             margin-top: 1rem;
             font-style: italic;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
         }
 
         /* ========================================
-           FOOTER
+           FOOTER (inside card)
            ======================================== */
-        footer {
-            position: relative;
-            z-index: 1;
+        .card-footer {
+            padding: 1.5rem 3rem;
+            border-top: 1px solid var(--border-color);
             text-align: center;
-            padding: 3rem 2rem;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
         }
 
-        footer a {
+        .card-footer a {
             color: var(--text-secondary);
             text-decoration: none;
         }
 
-        footer a:hover {
-            color: var(--accent-blue);
-        }
+        .card-footer a:hover { color: var(--accent-blue); }
 
         /* ========================================
            RESPONSIVE
            ======================================== */
         @media (max-width: 768px) {
-            .hero-card {
-                padding: 2rem;
-            }
+            .hero-top, .card-section { padding: 2rem; }
 
             .profile-section {
                 flex-direction: column;
@@ -648,383 +555,259 @@
                 text-align: center;
             }
 
-            .name-title {
-                text-align: center;
-            }
-
-            .interest-tags, .contact-links {
-                justify-content: center;
-            }
+            .name-title { text-align: center; }
+            .interest-tags, .contact-links { justify-content: center; }
 
             .profile-photo, .profile-photo-placeholder {
-                width: 260px;
-                height: 330px;
+                width: 220px; height: 280px;
             }
 
-            .name-title h1 {
-                font-size: 1.8rem;
-            }
-
-            .misc-grid {
-                grid-template-columns: 1fr;
-            }
+            .name-title h1 { font-size: 1.8rem; }
+            .card-footer { padding: 1.5rem 2rem; }
         }
 
         @media (max-width: 500px) {
-            .contact-links {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .contact-links a {
-                justify-content: center;
-            }
+            .contact-links { flex-direction: column; align-items: stretch; }
+            .contact-links a { justify-content: center; }
         }
     </style>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FPKYCL5WD4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-FPKYCL5WD4');
 </script>
-
 </head>
 <body>
-    <!-- Particle Canvas - Full Page Background -->
+
     <canvas id="particleCanvas"></canvas>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-card">
-            <div class="profile-section">
-                <img src="LukaVulicevic MED.jpg" alt="Luka Vulicevic" class="profile-photo"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="profile-photo-placeholder" style="display: none;">[Photo]</div>
+    <div class="page-wrapper">
+        <div class="main-card">
 
-                <div class="name-title">
-                    <h1>Luka Vulicevic</h1>
-                    <p class="role">PhD Student in Finance</p>
-                    <p class="institution">Rady School of Management<br>University of California San Diego</p>
+            <!-- ===== HERO TOP ===== -->
+            <div class="hero-top">
+                <div class="profile-section">
+                    <img src="LukaVulicevic MED.jpg" alt="Luka Vulicevic" class="profile-photo"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="profile-photo-placeholder" style="display: none;">[Photo]</div>
+
+                    <div class="name-title">
+                        <h1>Luka Vulicevic</h1>
+                        <p class="role">PhD Student in Finance</p>
+                        <p class="institution">Rady School of Management<br>University of California San Diego</p>
+                    </div>
+                </div>
+
+                <p class="bio-text">
+                    I am a second-year PhD student at UC San Diego studying finance. My research combines computer science and econometrics to address questions in asset pricing and financial economics. Prior to the PhD, I worked as a quantitative analyst in Toronto focusing on alpha research and asset allocation, and before that I earned a Master of Financial Economics from the University of Toronto.
+                </p>
+
+                <div class="contact-links">
+                    <a href="https://scholar.google.ca/citations?user=51Np_50AAAAJ&hl=en" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+                        Google Scholar
+                    </a>
+                    <a href="https://www.dropbox.com/scl/fi/yy9v4hp87x08dy6iui0js/CV.pdf?rlkey=1nkydf9a6c0vx9leva1cw15kp&e=1&st=g0k4csqo&dl=0" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        CV
+                    </a>
+                    <a href="https://github.com/LukaVuli" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://x.com/LukaVulicevic" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        Twitter
+                    </a>
+                    <a href="mailto:lvulicevic@ucsd.edu">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6L12 13L2 6"/></svg>
+                        Email
+                    </a>
                 </div>
             </div>
 
-            <p class="bio-text">
-                I am a second-year PhD student at UC San Diego studying finance. My research combines computer science and econometrics to address questions in asset pricing and financial economics. Prior to the PhD, I worked as a quantitative analyst in Toronto focusing on alpha research and asset allocation, and before that I earned a Master of Financial Economics from the University of Toronto.
-            </p>
+            <!-- ===== WORKING PAPERS ===== -->
+            <div class="card-section">
+                <h2 class="section-title">Working Papers</h2>
+                <div class="research-grid">
 
-            <div class="research-interests">
-                <h4>Research Interests</h4>
-                <div class="interest-tags">
-                    <span class="interest-tag">Asset Pricing</span>
-                    <span class="interest-tag">Large Language Models</span>
-                    <span class="interest-tag">Econometrics</span>
+                    <!-- Paper 1 -->
+                    <article class="paper-card" onclick="togglePaper(this)">
+                        <div class="paper-header">
+                            <div>
+                                <h3 class="paper-title">Compute, Complexity, and the Scaling Laws of Return Predictability</h3>
+                                <div class="paper-meta">
+                                    <span class="paper-authors">with Allan Timmermann</span>
+                                    <span class="paper-year">2026</span>
+                                </div>
+                            </div>
+                            <svg class="expand-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="paper-details">
+                            <div class="paper-details-inner">
+                                <p class="paper-abstract">
+                                    Investors' computing power ("compute") governs how much signal they can extract from high-dimensional data. Drawing on insights from LLM training, we show that forecast performance follows scaling laws—stable power-law functions between accuracy and training compute—that pin down both an irreducible bound on return predictability and the rate at which extra compute closes the gap. In firm-level cross-sectional return prediction, scaling laws explain over 80% of performance variation across models. Treating compute as a primitive yields sharp economic implications: scaling laws quantify predictability limits and the value of new data, they distinguish problems with strong versus weak returns to scale, and they deliver a market-efficiency metric by mapping computational advantage into a certainty equivalent. Measured this way, computational superiority earns sizable rents: a 25% marginal increase in compute would have raised an investor's Sharpe ratio by about 10% over the last 30 years, indicating substantial returns to computational sophistication.
+                                </p>
+                                <div class="paper-links">
+                                    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6105327" class="paper-link pdf" target="_blank">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        PDF
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paper 2: Entity Neutering -->
+                    <article class="paper-card entity-neutering" onclick="togglePaper(this)">
+                        <div class="paper-header">
+                            <div>
+                                <h3 class="paper-title">Entity Neutering</h3>
+                                <div class="paper-meta">
+                                    <span class="paper-authors">with Joseph Engelberg, Asaf Manela, & William Mullins</span>
+                                    <span class="paper-year">2026</span>
+                                </div>
+                            </div>
+                            <svg class="expand-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="paper-details">
+                            <div class="paper-details-inner">
+                                <p class="paper-abstract">
+                                    Cutting-edge LLMs are trained on recent data, creating a concern about look-ahead bias. We propose a solution called entity neutering: using LLMs to find and remove all identifying information from text. Our procedure uses an LLM agent that iteratively (i) masks entity-related terms and (ii) paraphrases the text until an independent LLM fails to recognize the target company from the text. In a sample of over 250,000 financial news articles we verify that, after neutering, ChatGPT and other LLMs identify the subject firm at the rate of random chance. Among the unidentified articles, the sentiment extracted from the raw text and the neutered text agree more than 90% of the time and have similar return predictability, with the difference providing an upper bound on look-ahead bias. The evidence here suggests that LLMs are able to effectively neuter text while maintaining semantic content. For look-ahead bias, LLMs can be both the problem and the solution.
+                                </p>
+                                <div class="paper-links">
+                                    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5182756" class="paper-link pdf" target="_blank">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        PDF
+                                    </a>
+                                    <a href="https://pypi.org/project/entity-neutering/" class="paper-link pypi" target="_blank">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.912S0 5.789 0 11.969c0 6.18 3.403 5.963 3.403 5.963h2.031v-2.867s-.109-3.402 3.35-3.402h5.769s3.24.052 3.24-3.13V3.23S18.28 0 11.914 0zm-3.22 1.867a1.043 1.043 0 1 1 0 2.086 1.043 1.043 0 0 1 0-2.086z"/><path d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.109S24 18.211 24 12.031c0-6.18-3.403-5.963-3.403-5.963h-2.031v2.867s.109 3.402-3.35 3.402H9.447s-3.24-.052-3.24 3.13V20.77S5.72 24 12.086 24zm3.22-1.867a1.043 1.043 0 1 1 0-2.086 1.043 1.043 0 0 1 0 2.086z"/></svg>
+                                        Python Package
+                                    </a>
+                                    <a href="https://github.com/LukaVuli/Entity_Neutering" class="paper-link code" target="_blank">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                        Code
+                                    </a>
+                                </div>
+                                <div class="presentations-badge">
+                                    <h5>Presentations</h5>
+                                    <div class="presentation-list">
+                                        <span class="presentation-item">NBER Summer Institute 2025</span>
+                                        <span class="presentation-item">Finance Research Revolution Conference</span>
+                                        <span class="presentation-item">Monash Applied Young Economists</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
                 </div>
             </div>
 
-            <div class="contact-links">
-                <a href="https://scholar.google.ca/citations?user=51Np_50AAAAJ&hl=en" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
-                    Google Scholar
-                </a>
-                <a href="https://www.dropbox.com/scl/fi/yy9v4hp87x08dy6iui0js/CV.pdf?rlkey=1nkydf9a6c0vx9leva1cw15kp&e=1&st=g0k4csqo&dl=0" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    CV
-                </a>
-                <a href="https://github.com/LukaVuli" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    GitHub
-                </a>
-                <a href="https://x.com/LukaVulicevic" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    Twitter
-                </a>
-<a href="mailto:lvulicevic@ucsd.edu">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6L12 13L2 6"/></svg>
-                    Email
-                </a>
-            </div>
-        </div>
+            <!-- ===== MISCELLANEOUS ===== -->
+            <div class="card-section">
+                <h2 class="section-title">Miscellaneous</h2>
+                <div class="misc-grid">
 
-        <div class="scroll-hint">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Research Section -->
-    <section class="section" id="research">
-        <h2 class="section-title">Working Papers</h2>
-
-        <div class="research-grid">
-            <!-- Paper 1: Scaling Laws -->
-            <article class="paper-card" onclick="togglePaper(this)">
-                <div class="paper-header">
-                    <div>
-                        <h3 class="paper-title">Compute, Complexity, and the Scaling Laws of Return Predictability</h3>
-                        <div class="paper-meta">
-                            <span class="paper-authors">with Allan Timmermann</span>
-                            <span class="paper-year">2026</span>
+                    <!-- Quotes -->
+                    <div class="misc-card" onclick="toggleMisc(this)">
+                        <div class="misc-card-header">
+                            <div class="misc-card-icon quotes">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+                            </div>
+                            <div class="misc-card-title">Quotes I Like</div>
+                            <svg class="misc-expand-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
                         </div>
-                    </div>
-                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="paper-details">
-                    <div class="paper-details-inner">
-                        <p class="paper-abstract">
-                            Investors' computing power ("compute") governs how much signal they can extract from high-dimensional data. Drawing on insights from LLM training, we show that forecast performance follows scaling laws—stable power-law functions between accuracy and training compute—that pin down both an irreducible bound on return predictability and the rate at which extra compute closes the gap. In firm-level cross-sectional return prediction, scaling laws explain over 80% of performance variation across models. Treating compute as a primitive yields sharp economic implications: scaling laws quantify predictability limits and the value of new data, they distinguish problems with strong versus weak returns to scale, and they deliver a market-efficiency metric by mapping computational advantage into a certainty equivalent. Measured this way, computational superiority earns sizable rents: a 25% marginal increase in compute would have raised an investor’s Sharpe ratio by about 10% over the last 30 years, indicating substantial returns to computational sophistication.
-                        </p>
-                        <div class="paper-links">
-                            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6105327" class="paper-link pdf" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                                PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Paper 2: Financial Statements -->
-            <!--
-<article class="paper-card" onclick="togglePaper(this)">
-                <div class="paper-header">
-                    <div>
-                        <h3 class="paper-title">Financial Statements and Macroeconomic Dynamics</h3>
-                        <div class="paper-meta">
-                            <span class="paper-authors">with Davide Pettenuzzo, Davide Sabbatucci, & Allan Timmermann</span>
-                            <span class="paper-year">2025</span>
-                        </div>
-                    </div>
-                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="paper-details">
-                    <div class="paper-details-inner">
-                        <p class="paper-abstract">
-                            What do companies' 10-Q filings reveal about the state of the macro economy and do specific accounting variables contain particularly relevant information? To address these questions, we analyze the lead-lag patterns of more than twenty accounting variables in relation to aggregate economic activity. We develop new daily corporate account business activity indices that aggregate firm-level accounting information while controlling for shifts in the composition of announcers and reducing firm-specific noise. Our new indices show that firm liquidity becomes significantly lower while corporate debt grows significantly faster several months prior to recessions, and thus can be used as leading indicators. Conversely, operations, earnings and profitability measures tend to be significantly lower after recessions, suggesting they are mostly lagging, pro-cyclical indicators of economic activity.
-                        </p>
-                        <div class="paper-links">
-                            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4922676" class="paper-link pdf" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                                PDF
-                            </a>
-                            <a href="https://corporateactivitytracker.com/#" class="paper-link data" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                Data
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
--->
-
-            <!-- Paper 3: Entity Neutering -->
-            <article class="paper-card entity-neutering" onclick="togglePaper(this)">
-                <div class="paper-header">
-                    <div>
-                        <h3 class="paper-title">Entity Neutering</h3>
-                        <div class="paper-meta">
-                            <span class="paper-authors">with Joseph Engelberg, Asaf Manela, & William Mullins</span>
-                            <span class="paper-year">2026</span>
-                        </div>
-                    </div>
-                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="paper-details">
-                    <div class="paper-details-inner">
-                        <p class="paper-abstract">
-                            Cutting-edge LLMs are trained on recent data, creating a concern about look-ahead bias. We propose a solution called entity neutering: using LLMs to find and remove all identifying information from text. Our procedure uses an LLM agent that iteratively (i) masks entity-related terms and (ii) paraphrases the text until an independent LLM fails to recognize the target company from the text. In a sample of over 250,000 financial news articles we verify that, after neutering, ChatGPT and other LLMs identify the subject firm at the rate of random chance. Among the unidentified articles, the sentiment extracted from the raw text and the neutered text agree more than 90% of the time and have similar return predictability, with the difference providing an upper bound on look-ahead bias. The evidence here suggests that LLMs are able to effectively neuter text while maintaining semantic content. For look-ahead bias, LLMs can be both the problem and the solution.
-                        </p>
-                        <div class="paper-links">
-                            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5182756" class="paper-link pdf" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                                PDF
-                            </a>
-                            <a href="https://github.com/LukaVuli/Entity_Neutering" class="paper-link code" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                Code
-                            </a>
-                        </div>
-                        <div class="presentations-badge">
-                            <h5>Presentations</h5>
-                            <div class="presentation-list">
-                                <span class="presentation-item">NBER Summer Institute 2025</span>
-                                <span class="presentation-item">Finance Research Revolution Conference</span>
-                                <span class="presentation-item">Monash Applied Young Economists</span>
+                        <div class="misc-card-content">
+                            <div class="misc-card-inner">
+                                <div class="quote-item">
+                                    <blockquote>"We have to forgo some mental tortures to deal with it, but I will accept it and see what happens."</blockquote>
+                                    <div class="attribution">— Gerolamo Cardano, on inventing complex numbers in "Ars Magna"</div>
+                                    <p class="commentary">This quote constantly resurfaces in my mind when doing theoretical work. When solving a problem and approaching a breakthrough, I often feel the most lost and confused. I've learned to embrace this feeling of being 'lost' and to keep progressing regardless, just to see what happens.</p>
+                                </div>
+                                <div class="quote-item">
+                                    <blockquote>"I'd compare stock pickers to astrologers, but I don't want to bad-mouth the astrologers."</blockquote>
+                                    <div class="attribution">— Eugene Fama</div>
+                                    <p class="commentary">Although markets are likely not efficient, they are undeniably difficult to beat. Given this challenge, I find it puzzling why industry professionals often exude such confidence in their work. A marginal unit of effort spent on sales yields far greater returns in the industry than in 'alpha' research.</p>
+                                </div>
+                                <div class="quote-item">
+                                    <blockquote>"There is no such thing as Alpha, only the Beta you don't know about."</blockquote>
+                                    <div class="attribution">— John Cochrane (attributed)</div>
+                                    <p class="commentary">This idea has always stood out and compelled me to think deeply about asset pricing. It has, without a doubt, influenced my own interest and research in asset pricing.</p>
+                                </div>
+                                <div class="quote-item">
+                                    <blockquote>"Buybacks are divisive. They divide people who understand finance from those that don't."</blockquote>
+                                    <div class="attribution">— Ken French</div>
+                                    <p class="commentary">I don't care for the topic as much as I care about the delivery. An eloquent shutdown. I can think of many topics which can replace the first word of this quote—can you?</p>
+                                </div>
+                                <div class="quote-item">
+                                    <blockquote>"I saw the plot first, ... and the first thing I thought was: programming error."</blockquote>
+                                    <div class="attribution">— Richard Roll, on making Figure 2 of FFJR (1969)</div>
+                                    <p class="commentary">This is the first thought an empiricist should have when examining their results. Especially when they are as beautiful and clear as FFJR (1969).</p>
+                                </div>
+                                <div class="quote-item">
+                                    <blockquote>"The past appears to be a predictably unpredictable predictor of the future."</blockquote>
+                                    <div class="attribution">— Benjamin</div>
+                                </div>
+                                <div class="quote-item">
+                                    <blockquote>"Your Grandmother Is Wrong."</blockquote>
+                                    <div class="attribution">— Jonathan Berk, "Money Management in Equilibrium" (2019)</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </article>
-        </div>
-    </section>
 
-    <!-- Misc Section -->
-    <section class="misc-section" id="misc">
-        <h2 class="section-title">Miscellaneous</h2>
-
-        <div class="misc-grid">
-            <!-- Quotes -->
-            <div class="misc-card" onclick="toggleMisc(this)">
-                <div class="misc-card-header">
-                    <div class="misc-card-icon quotes">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-                    </div>
-                    <div class="misc-card-title">Quotes I Like</div>
-                    <svg class="misc-expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="misc-card-content">
-                    <div class="misc-card-inner">
-                        <div class="quote-item">
-                            <blockquote>"We have to forgo some mental tortures to deal with it, but I will accept it and see what happens."</blockquote>
-                            <div class="attribution">— Gerolamo Cardano, on inventing complex numbers in "Ars Magna"</div>
-                            <p class="commentary">This quote constantly resurfaces in my mind when doing theoretical work. When solving a problem and approaching a breakthrough, I often feel the most lost and confused. I've learned to embrace this feeling of being 'lost' and to keep progressing regardless, just to see what happens.</p>
+                    <!-- Why Economics -->
+                    <div class="misc-card" onclick="toggleMisc(this)">
+                        <div class="misc-card-header">
+                            <div class="misc-card-icon econ">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            </div>
+                            <div class="misc-card-title">Why We Choose to Study Economics</div>
+                            <svg class="misc-expand-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
                         </div>
-
-                        <div class="quote-item">
-                            <blockquote>"I'd compare stock pickers to astrologers, but I don't want to bad-mouth the astrologers."</blockquote>
-                            <div class="attribution">— Eugene Fama</div>
-                            <p class="commentary">Although markets are likely not efficient, they are undeniably difficult to beat. Given this challenge, I find it puzzling why industry professionals often exude such confidence in their work. A marginal unit of effort spent on sales yields far greater returns in the industry than in 'alpha' research.</p>
-                        </div>
-
-                        <div class="quote-item">
-                            <blockquote>"There is no such thing as Alpha, only the Beta you don't know about."</blockquote>
-                            <div class="attribution">— John Cochrane (attributed)</div>
-                            <p class="commentary">This idea has always stood out and compelled me to think deeply about asset pricing. It has, without a doubt, influenced my own interest and research in asset pricing.</p>
-                        </div>
-
-                        <div class="quote-item">
-                            <blockquote>"Buybacks are divisive. They divide people who understand finance from those that don't."</blockquote>
-                            <div class="attribution">— Ken French</div>
-                            <p class="commentary">I don't care for the topic as much as I care about the delivery. An eloquent shutdown. I can think of many topics which can replace the first word of this quote—can you?</p>
-                        </div>
-
-                        <div class="quote-item">
-                            <blockquote>"I saw the plot first, ... and the first thing I thought was: programming error."</blockquote>
-                            <div class="attribution">— Richard Roll, on making Figure 2 of FFJR (1969)</div>
-                            <p class="commentary">This is the first thought an empiricist should have when examining their results. Especially when they are as beautiful and clear as FFJR (1969).</p>
-                        </div>
-
-                        <div class="quote-item">
-                            <blockquote>"The past appears to be a predictably unpredictable predictor of the future."</blockquote>
-                            <div class="attribution">— Benjamin</div>
-                        </div>
-
-                        <div class="quote-item">
-                            <blockquote>"Your Grandmother Is Wrong."</blockquote>
-                            <div class="attribution">— Jonathan Berk, "Money Management in Equilibrium" (2019)</div>
+                        <div class="misc-card-content">
+                            <div class="misc-card-inner">
+                                <p class="econ-essay">No person can fully grasp how far and how fast economic thought has traveled, but condense, if you will, the 50,000 years of human economic activity into a time span of but a half-century.</p>
+                                <p class="econ-essay" style="margin-top: 1rem;">Stated in these terms, for the first 40 years, we know very little—except that at the end of them, man had learned to barter one thing for another. Then about 10 years ago, we invented money and discovered we could store value in metal coins. Only 5 years ago did we establish the first banks and learn that trust could be an asset. The joint-stock company—less than 18 months ago. Adam Smith wrote The Wealth of Nations and gave us the invisible hand just last year. The Industrial Revolution—which transformed everything—came last summer. Marx wrote Das Kapital last fall. The Federal Reserve was created last spring. Keynes published his General Theory and revolutionized our understanding just 8 months ago. Bretton Woods and the modern international monetary system—6 months ago. Credit cards arrived 3 months ago. We floated our currencies off the gold standard 10 weeks ago. The first derivatives appeared 5 weeks ago. The internet enabled digital commerce just last month. The 2008 financial crisis happened two weeks ago last Tuesday. Bitcoin was invented 10 days ago. And this morning, as we woke, artificial intelligence began trading securities faster than human thought.</p>
+                                <p class="econ-essay" style="margin-top: 1rem;">This is a breathtaking pace, a pace that makes us dizzy. And now we stand at a crossroads, asking not whether our economy can grow, but whether our wisdom can match our innovation—whether we can understand these forces—whether we can master them.</p>
+                                <p class="econ-essay" style="margin-top: 1rem; font-weight: 600; color: var(--text-primary);">We choose to study economics, not because it is easy but because it is hard.</p>
+                                <p class="econ-essay" style="margin-top: 0.75rem; font-style: italic; color: var(--text-muted); font-size: 0.82rem;">— Made by Claude Sonnet 4.5 when asked to roleplay JFK being asked why study economics during a speech at Rice.</p>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
-            <!-- Why Economics -->
-            <div class="misc-card" onclick="toggleMisc(this)">
-                <div class="misc-card-header">
-                    <div class="misc-card-icon econ">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    </div>
-                    <div class="misc-card-title">Why We Choose to Study Economics</div>
-                    <svg class="misc-expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="misc-card-content">
-                    <div class="misc-card-inner">
-                        <p class="econ-essay">
-                            No person can fully grasp how far and how fast economic thought has traveled, but condense, if you will, the 50,000 years of human economic activity into a time span of but a half-century.
-                        </p>
-                        <p class="econ-essay" style="margin-top: 1rem;">
-                            Stated in these terms, for the first 40 years, we know very little—except that at the end of them, man had learned to barter one thing for another. Then about 10 years ago, we invented money and discovered we could store value in metal coins. Only 5 years ago did we establish the first banks and learn that trust could be an asset. The joint-stock company—less than 18 months ago. Adam Smith wrote The Wealth of Nations and gave us the invisible hand just last year. The Industrial Revolution—which transformed everything—came last summer. Marx wrote Das Kapital last fall. The Federal Reserve was created last spring. Keynes published his General Theory and revolutionized our understanding just 8 months ago. Bretton Woods and the modern international monetary system—6 months ago. Credit cards arrived 3 months ago. We floated our currencies off the gold standard 10 weeks ago. The first derivatives appeared 5 weeks ago. The internet enabled digital commerce just last month. The 2008 financial crisis happened two weeks ago last Tuesday. Bitcoin was invented 10 days ago. And this morning, as we woke, artificial intelligence began trading securities faster than human thought.
-                        </p>
-                        <p class="econ-essay" style="margin-top: 1rem;">
-                            This is a breathtaking pace, a pace that makes us dizzy. And now we stand at a crossroads, asking not whether our economy can grow, but whether our wisdom can match our innovation—whether we can understand these forces—whether we can master them.
-                        </p>
-                        <p class="econ-essay" style="margin-top: 1rem; font-weight: 600; color: var(--text-primary);">
-                            We choose to study economics, not because it is easy but because it is hard.
-                        </p>
-                        <p class="econ-essay signature">
-                            — Made by Claude Sonnet 4.5 when asked to roleplay JFK being asked why study economics during a speech at Rice.
-                        </p>
-                    </div>
-                </div>
+            <!-- ===== FOOTER ===== -->
+            <div class="card-footer">
+                <p>© 2025 Luka Vulicevic · Rady School of Management, UC San Diego</p>
+                <p style="margin-top: 0.3rem;"><a href="mailto:lvulicevic@ucsd.edu">lvulicevic@ucsd.edu</a></p>
             </div>
 
-            <!-- Technology -->
-            <div class="misc-card" onclick="toggleMisc(this)">
-                <div class="misc-card-header">
-                    <div class="misc-card-icon tech">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                    </div>
-                    <div class="misc-card-title">Technology</div>
-                    <svg class="misc-expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="misc-card-content">
-                    <div class="misc-card-inner">
-                        <div class="tech-item">
-                            <h4>Server: Apple Mac Studio, M3 Ultra, 500GB Unified Memory</h4>
-                            <p>Working with LLMs is hard. It is even harder when you want to work with larger models. This machine allows me to quickly (and cheaply) test new ideas. I would not recommend it for many people but it has been a game changer for my research.</p>
-                        </div>
+        </div><!-- /.main-card -->
+    </div><!-- /.page-wrapper -->
 
-                        <div class="tech-item">
-                            <h4>Computer: Apple MacBook Pro, M2, 16-inch</h4>
-                            <p>My first Mac and it is my baby. I never thought of using/buying a Mac, but with the recent chip and integration with the rest of the Apple ecosystem: this thing is awesome.</p>
-                        </div>
-
-                        <div class="tech-item">
-                            <h4>Tablet: Apple iPad Pro M2</h4>
-                            <p>I used to be pretty 'old school' when doing math: pen, paper, and a massive binder. Being able to search handwritten documents is a theorist's life hack.</p>
-                        </div>
-
-                        <div class="tech-item">
-                            <h4>Source Control: Azure DevOps (private) & GitHub (public)</h4>
-                            <p>DevOps is complicated with a high learning curve, but the ability to integrate into VMs and blob storage is unbeatable. The project management abilities also help with building big research infrastructure. GitHub is the easiest way to share code publicly.</p>
-                        </div>
-
-                        <div class="tech-item">
-                            <h4>IDE: PyCharm</h4>
-                            <p>It has a bunch of features which makes coding faster. I have encountered several circumstances where PyCharm becomes schizophrenic and requires resetting, but—so far—the functionality is worth more than this nuisance.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Luka Vulicevic · Rady School of Management, UC San Diego</p>
-        <p style="margin-top: 0.5rem;">
-            <a href="mailto:lvulicevic@ucsd.edu">lvulicevic@ucsd.edu</a>
-        </p>
-    </footer>
-
-    <!-- Particle Network Visualization Script -->
     <script>
         // ========================================
-        // PARTICLE NETWORK EFFECT (Gu-style)
+        // PARTICLE NETWORK
         // ========================================
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
 
-        let width, height;
-        let particles = [];
-        let mouseX = null;
-        let mouseY = null;
-        const mouseRadius = 120;
-        const connectionDistance = 150;
+        let width, height, particles = [], mouseX = null, mouseY = null;
+        const mouseRadius = 120, connectionDistance = 150;
 
         function resizeCanvas() {
             width = window.innerWidth;
@@ -1033,27 +816,20 @@
             canvas.height = height;
         }
 
-        // Particle class - white nodes of varying sizes
         class Particle {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                // Varying sizes - some larger "hub" nodes
                 this.radius = Math.random() < 0.1 ? Math.random() * 4 + 3 : Math.random() * 2.5 + 1;
-                // Constant movement velocity (5-10% faster)
                 this.vx = (Math.random() - 0.5) * 1.35;
                 this.vy = (Math.random() - 0.5) * 1.35;
-                // Slightly different opacities
                 this.alpha = Math.random() * 0.4 + 0.6;
             }
 
             update() {
-                // Mouse interaction - particles move away from cursor
                 if (mouseX !== null && mouseY !== null) {
-                    const dx = this.x - mouseX;
-                    const dy = this.y - mouseY;
+                    const dx = this.x - mouseX, dy = this.y - mouseY;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-
                     if (dist < mouseRadius) {
                         const force = (mouseRadius - dist) / mouseRadius;
                         const angle = Math.atan2(dy, dx);
@@ -1061,40 +837,18 @@
                         this.vy += Math.sin(angle) * force * 0.8;
                     }
                 }
-
-                // Apply velocity
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Dampen velocity slightly
-                this.vx *= 0.99;
-                this.vy *= 0.99;
-
-                // Keep minimum movement
+                this.x += this.vx; this.y += this.vy;
+                this.vx *= 0.99; this.vy *= 0.99;
                 const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
                 if (speed < 0.3) {
                     const angle = Math.random() * Math.PI * 2;
                     this.vx += Math.cos(angle) * 0.1;
                     this.vy += Math.sin(angle) * 0.1;
                 }
-
-                // Bounce off edges with some randomness
-                if (this.x < 0) {
-                    this.x = 0;
-                    this.vx = Math.abs(this.vx) * (0.8 + Math.random() * 0.4);
-                }
-                if (this.x > width) {
-                    this.x = width;
-                    this.vx = -Math.abs(this.vx) * (0.8 + Math.random() * 0.4);
-                }
-                if (this.y < 0) {
-                    this.y = 0;
-                    this.vy = Math.abs(this.vy) * (0.8 + Math.random() * 0.4);
-                }
-                if (this.y > height) {
-                    this.y = height;
-                    this.vy = -Math.abs(this.vy) * (0.8 + Math.random() * 0.4);
-                }
+                if (this.x < 0) { this.x = 0; this.vx = Math.abs(this.vx) * (0.8 + Math.random() * 0.4); }
+                if (this.x > width) { this.x = width; this.vx = -Math.abs(this.vx) * (0.8 + Math.random() * 0.4); }
+                if (this.y < 0) { this.y = 0; this.vy = Math.abs(this.vy) * (0.8 + Math.random() * 0.4); }
+                if (this.y > height) { this.y = height; this.vy = -Math.abs(this.vy) * (0.8 + Math.random() * 0.4); }
             }
 
             draw() {
@@ -1107,11 +861,8 @@
 
         function initParticles() {
             particles = [];
-            // 125% more particles for denser network
-            const particleCount = Math.min(Math.floor((width * height) / 4222), 350);
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            const count = Math.min(Math.floor((width * height) / 4222), 350);
+            for (let i = 0; i < count; i++) particles.push(new Particle());
         }
 
         function drawConnections() {
@@ -1120,33 +871,25 @@
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-
                     if (dist < connectionDistance) {
-                        // Opacity based on distance - fades as connection stretches
-                        const opacity = (1 - dist / connectionDistance) * 0.6;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - dist / connectionDistance) * 0.6})`;
                         ctx.lineWidth = 0.8;
                         ctx.stroke();
                     }
                 }
             }
-
-            // Draw connections to mouse cursor
             if (mouseX !== null && mouseY !== null) {
                 particles.forEach(p => {
-                    const dx = p.x - mouseX;
-                    const dy = p.y - mouseY;
+                    const dx = p.x - mouseX, dy = p.y - mouseY;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-
                     if (dist < mouseRadius * 1.5) {
-                        const opacity = (1 - dist / (mouseRadius * 1.5)) * 0.3;
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(mouseX, mouseY);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - dist / (mouseRadius * 1.5)) * 0.3})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -1156,39 +899,19 @@
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-
-            // Update particles
             particles.forEach(p => p.update());
-
-            // Draw connections first (behind nodes)
             drawConnections();
-
-            // Draw particles (nodes)
             particles.forEach(p => p.draw());
-
             requestAnimationFrame(animate);
         }
 
-        // Mouse tracking
         canvas.style.pointerEvents = 'auto';
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        document.addEventListener('mouseleave', () => {
-            mouseX = null;
-            mouseY = null;
-        });
-
-        // Click creates burst effect
-        document.addEventListener('click', (e) => {
+        document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+        document.addEventListener('mouseleave', () => { mouseX = null; mouseY = null; });
+        document.addEventListener('click', e => {
             particles.forEach(p => {
-                const dx = p.x - e.clientX;
-                const dy = p.y - e.clientY;
+                const dx = p.x - e.clientX, dy = p.y - e.clientY;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-
                 if (dist < 250) {
                     const force = (250 - dist) / 250;
                     const angle = Math.atan2(dy, dx);
@@ -1198,30 +921,16 @@
             });
         });
 
-        // Resize handler
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            initParticles();
-        });
-
-        // Init
-        resizeCanvas();
-        initParticles();
-        animate();
+        window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+        resizeCanvas(); initParticles(); animate();
 
         // ========================================
-        // PAPER CARD EXPANSION
+        // TOGGLES
         // ========================================
         function togglePaper(card) {
-            document.querySelectorAll('.paper-card').forEach(c => {
-                if (c !== card) c.classList.remove('expanded');
-            });
             card.classList.toggle('expanded');
         }
 
-        // ========================================
-        // MISC CARD EXPANSION
-        // ========================================
         function toggleMisc(card) {
             card.classList.toggle('expanded');
         }
