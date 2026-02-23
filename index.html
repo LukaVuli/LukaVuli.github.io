@@ -313,11 +313,15 @@
             border-top: 1px solid var(--border-color);
         }
 
+        .paper-always-visible {
+            padding: 0 1.25rem 1rem;
+        }
+
         .paper-abstract {
             font-size: 0.86rem;
             color: var(--text-secondary);
             line-height: 1.7;
-            margin-bottom: 1.1rem;
+            margin-bottom: 0;
         }
 
         .paper-links {
@@ -643,16 +647,19 @@
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </div>
+                        <div class="paper-always-visible" onclick="event.stopPropagation()">
+                            <div class="paper-links">
+                                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6105327" class="paper-link pdf" target="_blank">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    PDF
+                                </a>
+                            </div>
+                        </div>
                         <div class="paper-details">
                             <div class="paper-details-inner">
                                 <p class="paper-abstract">
-                                    Investors’ computing power (“compute”) governs how much signal they can extract from high-dimensional data. We show that forecast performance follows scaling laws—stable power-law relationships between accuracy and training compute—that pin down both an irreducible bound on return predictability and the rate at which additional compute improves accuracy. In firm-level cross-sectional return prediction, scaling laws explain over 80% of performance variation across models. Treating compute as a primitive yields sharp economic implications: scaling laws quantify predictability limits and the value of new data, distinguish problems with strong versus weak returns to scale, and deliver a market-efficiency metric by mapping computational advantage into a certainty equivalent. Measured this way, computational superiority earns sizable rents: a 25% increase in compute would have raised an investor’s Sharpe ratio by about 10% over the last 30 years, indicating substantial returns to computational sophistication.                                </p>
-                                <div class="paper-links">
-                                    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6105327" class="paper-link pdf" target="_blank">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                                        PDF
-                                    </a>
-                                </div>
+                                    Investors’ computing power (“compute”) governs how much signal they can extract from high-dimensional data. We show that forecast performance follows scaling laws—stable power-law relationships between accuracy and training compute—that pin down both an irreducible bound on return predictability and the rate at which additional compute improves accuracy. In firm-level cross-sectional return prediction, scaling laws explain over 80% of performance variation across models. Treating compute as a primitive yields sharp economic implications: scaling laws quantify predictability limits and the value of new data, distinguish problems with strong versus weak returns to scale, and deliver a market-efficiency metric by mapping computational advantage into a certainty equivalent. Measured this way, computational superiority earns sizable rents: a 25% increase in compute would have raised an investor’s Sharpe ratio by about 10% over the last 30 years, indicating substantial returns to computational sophistication.
+                                </p>
                             </div>
                         </div>
                     </article>
@@ -671,33 +678,34 @@
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </div>
+                        <div class="paper-always-visible" onclick="event.stopPropagation()">
+                            <div class="paper-links">
+                                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5182756" class="paper-link pdf" target="_blank">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    PDF
+                                </a>
+                                <a href="https://pypi.org/project/entity-neutering/" class="paper-link pypi" target="_blank">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.912S0 5.789 0 11.969c0 6.18 3.403 5.963 3.403 5.963h2.031v-2.867s-.109-3.402 3.35-3.402h5.769s3.24.052 3.24-3.13V3.23S18.28 0 11.914 0zm-3.22 1.867a1.043 1.043 0 1 1 0 2.086 1.043 1.043 0 0 1 0-2.086z"/><path d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.109S24 18.211 24 12.031c0-6.18-3.403-5.963-3.403-5.963h-2.031v2.867s.109 3.402-3.35 3.402H9.447s-3.24-.052-3.24 3.13V20.77S5.72 24 12.086 24zm3.22-1.867a1.043 1.043 0 1 1 0-2.086 1.043 1.043 0 0 1 0 2.086z"/></svg>
+                                    Python Package
+                                </a>
+                                <a href="https://github.com/LukaVuli/Entity_Neutering" class="paper-link code" target="_blank">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    Code
+                                </a>
+                            </div>
+                            <div class="presentations-badge" style="border-top: none; padding-top: 0.4rem;">
+                                <div class="presentation-list">
+                                    <span class="presentation-item">NBER Summer Institute 2025</span>
+                                    <span class="presentation-item">Finance Research Revolution Conference</span>
+                                    <span class="presentation-item">Monash Applied Young Economists</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="paper-details">
                             <div class="paper-details-inner">
                                 <p class="paper-abstract">
                                     Cutting-edge LLMs are trained on recent data, creating a concern about look-ahead bias. We propose a solution called entity neutering: using LLMs to find and remove all identifying information from text. Our procedure uses an LLM agent that iteratively (i) masks entity-related terms and (ii) paraphrases the text until an independent LLM fails to recognize the target company from the text. In a sample of over 250,000 financial news articles we verify that, after neutering, ChatGPT and other LLMs identify the subject firm at the rate of random chance. Among the unidentified articles, the sentiment extracted from the raw text and the neutered text agree more than 90% of the time and have similar return predictability, with the difference providing an upper bound on look-ahead bias. The evidence here suggests that LLMs are able to effectively neuter text while maintaining semantic content. For look-ahead bias, LLMs can be both the problem and the solution.
                                 </p>
-                                <div class="paper-links">
-                                    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5182756" class="paper-link pdf" target="_blank">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                                        PDF
-                                    </a>
-                                    <a href="https://pypi.org/project/entity-neutering/" class="paper-link pypi" target="_blank">
-                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.912S0 5.789 0 11.969c0 6.18 3.403 5.963 3.403 5.963h2.031v-2.867s-.109-3.402 3.35-3.402h5.769s3.24.052 3.24-3.13V3.23S18.28 0 11.914 0zm-3.22 1.867a1.043 1.043 0 1 1 0 2.086 1.043 1.043 0 0 1 0-2.086z"/><path d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.109S24 18.211 24 12.031c0-6.18-3.403-5.963-3.403-5.963h-2.031v2.867s.109 3.402-3.35 3.402H9.447s-3.24-.052-3.24 3.13V20.77S5.72 24 12.086 24zm3.22-1.867a1.043 1.043 0 1 1 0-2.086 1.043 1.043 0 0 1 0 2.086z"/></svg>
-                                        Python Package
-                                    </a>
-                                    <a href="https://github.com/LukaVuli/Entity_Neutering" class="paper-link code" target="_blank">
-                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                        Code
-                                    </a>
-                                </div>
-                                <div class="presentations-badge">
-                                    <h5>Presentations</h5>
-                                    <div class="presentation-list">
-                                        <span class="presentation-item">NBER Summer Institute 2025</span>
-                                        <span class="presentation-item">Finance Research Revolution Conference</span>
-                                        <span class="presentation-item">Monash Applied Young Economists</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </article>
