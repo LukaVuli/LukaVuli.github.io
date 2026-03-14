@@ -47,9 +47,6 @@
             z-index: 0;
         }
 
-        /* ========================================
-           MAIN WRAPPER - single page, centered
-           ======================================== */
         .page-wrapper {
             position: relative;
             z-index: 1;
@@ -60,9 +57,6 @@
             padding: 4rem 2rem 4rem;
         }
 
-        /* ========================================
-           THE ONE CARD
-           ======================================== */
         .main-card {
             background: rgba(18, 18, 26, 0.92);
             backdrop-filter: blur(20px);
@@ -73,13 +67,9 @@
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
         }
 
-        /* Clip inner card corners to the parent border-radius */
         .main-card > :first-child { border-radius: 15px 15px 0 0; }
         .main-card > :last-child { border-radius: 0 0 15px 15px; }
 
-        /* ========================================
-           HERO TOP SECTION (inside the card)
-           ======================================== */
         .hero-top {
             padding: 3rem 3rem 2rem;
         }
@@ -197,18 +187,12 @@
 
         .contact-links svg { width: 15px; height: 15px; }
 
-        /* ========================================
-           DIVIDER BETWEEN HERO AND SECTIONS
-           ======================================== */
         .card-divider {
             height: 1px;
             background: var(--border-color);
             margin: 0 0;
         }
 
-        /* ========================================
-           INNER SECTIONS (papers, misc)
-           ======================================== */
         .card-section {
             padding: 2.5rem 3rem;
         }
@@ -225,9 +209,6 @@
             color: var(--text-primary);
         }
 
-        /* ========================================
-           RESEARCH CARDS
-           ======================================== */
         .research-grid {
             display: flex;
             flex-direction: column;
@@ -389,9 +370,6 @@
             color: var(--accent-red);
         }
 
-        /* ========================================
-           MISC CARDS
-           ======================================== */
         .misc-grid {
             display: flex;
             flex-direction: column;
@@ -529,9 +507,6 @@
             font-size: 0.82rem;
         }
 
-        /* ========================================
-           FOOTER (inside card)
-           ======================================== */
         .card-footer {
             padding: 1.5rem 3rem;
             border-top: 1px solid var(--border-color);
@@ -547,9 +522,6 @@
 
         .card-footer a:hover { color: var(--accent-blue); }
 
-        /* ========================================
-           RESPONSIVE
-           ======================================== */
         @media (max-width: 768px) {
             .hero-top, .card-section { padding: 2rem; }
 
@@ -575,13 +547,6 @@
             .contact-links a { justify-content: center; }
         }
     </style>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FPKYCL5WD4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FPKYCL5WD4');
-</script>
 </head>
 <body>
 
@@ -621,7 +586,7 @@
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         Twitter
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#1f73696a73767c7a69767c5f6a7c6c7b317a7b6a">
+                    <a href="mailto:lvulicevic@ucsd.edu">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6L12 13L2 6"/></svg>
                         Email
                     </a>
@@ -632,6 +597,37 @@
             <div class="card-section">
                 <h2 class="section-title">Working Papers (PDFs; code/data for select papers)</h2>
                 <div class="research-grid">
+
+                    <!-- Paper 0: Do LLMs Make Markets More Efficient? -->
+                    <article class="paper-card" onclick="togglePaper(this)">
+                        <div class="paper-header">
+                            <div>
+                                <h3 class="paper-title">Do LLMs Make Markets More Efficient?</h3>
+                                <div class="paper-meta">
+                                    <span class="paper-authors">with Runjing Lu & Yongxin Xu</span>
+                                    <span class="paper-year">2026</span>
+                                </div>
+                            </div>
+                            <svg class="expand-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="paper-always-visible" onclick="event.stopPropagation()">
+                            <div class="paper-links">
+                                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6417099" class="paper-link pdf" target="_blank">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    PDF
+                                </a>
+                            </div>
+                        </div>
+                        <div class="paper-details">
+                            <div class="paper-details-inner">
+                                <p class="paper-abstract">
+                                    This paper evaluates whether large language models (LLMs) improve or impair market efficiency. Exploiting plausibly exogenous outages at major LLM providers, we find that LLM availability eliminates at least 46% to 61% of post-news drift into the next trading day. The absence of reversal alongside the magnitude of this reduction suggests that LLMs play a first-order role in short-horizon price discovery. Because LLM supply is highly concentrated, outages expose a single point of failure in market-wide information processing. Consistent with this interpretation, investors insulated from major LLM outages can earn more than twice the day t + 1 returns of the long-short news-sentiment strategy following outage events.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
 
                     <!-- Paper 1 -->
                     <article class="paper-card" onclick="togglePaper(this)">
@@ -658,7 +654,7 @@
                         <div class="paper-details">
                             <div class="paper-details-inner">
                                 <p class="paper-abstract">
-                                    Investors’ computing power (“compute”) governs how much signal they can extract from high-dimensional data. We show that forecast performance follows scaling laws—stable power-law relationships between accuracy and training compute—that pin down both an irreducible bound on return predictability and the rate at which additional compute improves accuracy. In firm-level cross-sectional return prediction, scaling laws explain over 80% of performance variation across models. Treating compute as a primitive yields sharp economic implications: scaling laws quantify predictability limits and the value of new data, distinguish problems with strong versus weak returns to scale, and deliver a market-efficiency metric by mapping computational advantage into a certainty equivalent. Measured this way, computational superiority earns sizable rents: a 25% increase in compute would have raised an investor’s Sharpe ratio by about 10% over the last 30 years, indicating substantial returns to computational sophistication.
+                                    Investors' computing power ("compute") governs how much signal they can extract from high-dimensional data. We show that forecast performance follows scaling laws—stable power-law relationships between accuracy and training compute—that pin down both an irreducible bound on return predictability and the rate at which additional compute improves accuracy. In firm-level cross-sectional return prediction, scaling laws explain over 80% of performance variation across models. Treating compute as a primitive yields sharp economic implications: scaling laws quantify predictability limits and the value of new data, distinguish problems with strong versus weak returns to scale, and deliver a market-efficiency metric by mapping computational advantage into a certainty equivalent. Measured this way, computational superiority earns sizable rents: a 25% increase in compute would have raised an investor's Sharpe ratio by about 10% over the last 30 years, indicating substantial returns to computational sophistication.
                                 </p>
                             </div>
                         </div>
@@ -705,6 +701,8 @@
                             <div class="paper-details-inner">
                                 <p class="paper-abstract">
                                     Cutting-edge LLMs are trained on recent data, creating a concern about look-ahead bias. We propose a solution called entity neutering: using LLMs to find and remove all identifying information from text. Our procedure uses an LLM agent that iteratively (i) masks entity-related terms and (ii) paraphrases the text until an independent LLM fails to recognize the target company from the text. In a sample of over 500,000 financial news articles we verify that, after neutering, ChatGPT and other LLMs identify the subject firm at the rate of random chance.  Among the unidentified articles, the sentiment extracted from the raw text and the neutered text agree more than 90% of the time and have similar return predictability, with the difference providing an upper bound on look-ahead bias.  We also demonstrate entity neutering on longer texts: MD&As and earnings call transcripts.  Overall, the evidence suggests that LLMs are able to effectively neuter text while maintaining semantic content.  For look-ahead bias, LLMs can be both the problem and the solution.
+                                </p>
+                            </div>
                         </div>
                     </article>
 
@@ -794,13 +792,13 @@
             <!-- ===== FOOTER ===== -->
             <div class="card-footer">
                 <p>© 2025 Luka Vulicevic · Rady School of Management, UC San Diego</p>
-                <p style="margin-top: 0.3rem;"><a href="/cdn-cgi/l/email-protection#8ae6fcffe6e3e9effce3e9caffe9f9eea4efeeff"><span class="__cf_email__" data-cfemail="9bf7edeef7f2f8feedf2f8dbeef8e8ffb5feffee">[email&#160;protected]</span></a></p>
+                <p style="margin-top: 0.3rem;"><a href="mailto:lvulicevic@ucsd.edu">lvulicevic@ucsd.edu</a></p>
             </div>
 
         </div><!-- /.main-card -->
     </div><!-- /.page-wrapper -->
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ========================================
         // PARTICLE NETWORK
         // ========================================
