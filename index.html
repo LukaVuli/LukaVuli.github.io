@@ -879,12 +879,19 @@
 
         let width, height, particles = [], mouseX = null, mouseY = null;
         const mouseRadius = 120, connectionDistance = 150;
+        const mouseRadiusSq = mouseRadius * mouseRadius;
+        const connectionDistanceSq = connectionDistance * connectionDistance;
+        const mouseLineRadius = mouseRadius * 1.5;
+        const mouseLineRadiusSq = mouseLineRadius * mouseLineRadius;
 
         function resizeCanvas() {
             width = window.innerWidth;
             height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
+            // Render at native device resolution, but keep all coordinates in CSS pixels.
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
 
         class Particle {
@@ -900,18 +907,17 @@
             update() {
                 if (mouseX !== null && mouseY !== null) {
                     const dx = this.x - mouseX, dy = this.y - mouseY;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouseRadius) {
+                    const distSq = dx * dx + dy * dy;
+                    if (distSq < mouseRadiusSq) {
+                        const dist = Math.sqrt(distSq) || 1;
                         const force = (mouseRadius - dist) / mouseRadius;
-                        const angle = Math.atan2(dy, dx);
-                        this.vx += Math.cos(angle) * force * 0.8;
-                        this.vy += Math.sin(angle) * force * 0.8;
+                        this.vx += (dx / dist) * force * 0.8;
+                        this.vy += (dy / dist) * force * 0.8;
                     }
                 }
                 this.x += this.vx; this.y += this.vy;
                 this.vx *= 0.99; this.vy *= 0.99;
-                const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-                if (speed < 0.3) {
+                if (this.vx * this.vx + this.vy * this.vy < 0.09) {
                     const angle = Math.random() * Math.PI * 2;
                     this.vx += Math.cos(angle) * 0.1;
                     this.vy += Math.sin(angle) * 0.1;
@@ -923,9 +929,9 @@
             }
 
             draw() {
+                ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
                 ctx.fill();
             }
         }
@@ -936,43 +942,81 @@
             for (let i = 0; i < count; i++) particles.push(new Particle());
         }
 
+        function drawLink(a, b) {
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < connectionDistanceSq) {
+                ctx.globalAlpha = (1 - Math.sqrt(distSq) / connectionDistance) * 0.6;
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.stroke();
+            }
+        }
+
+        function linkToCell(a, cell) {
+            if (!cell) return;
+            for (let j = 0; j < cell.length; j++) drawLink(a, cell[j]);
+        }
+
         function drawConnections() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < connectionDistance) {
+            // Bucket particles into connectionDistance-sized cells so each
+            // particle is only compared against its own and adjacent cells.
+            const cellSize = connectionDistance;
+            const cols = Math.max(1, Math.ceil(width / cellSize));
+            const rows = Math.max(1, Math.ceil(height / cellSize));
+            const grid = new Array(cols * rows);
+            for (const p of particles) {
+                const cx = Math.min(cols - 1, Math.max(0, Math.floor(p.x / cellSize)));
+                const cy = Math.min(rows - 1, Math.max(0, Math.floor(p.y / cellSize)));
+                const idx = cy * cols + cx;
+                (grid[idx] || (grid[idx] = [])).push(p);
+            }
+
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 0.8;
+            for (let cy = 0; cy < rows; cy++) {
+                for (let cx = 0; cx < cols; cx++) {
+                    const cell = grid[cy * cols + cx];
+                    if (!cell) continue;
+                    for (let i = 0; i < cell.length; i++) {
+                        const a = cell[i];
+                        for (let j = i + 1; j < cell.length; j++) drawLink(a, cell[j]);
+                        // Right and lower neighbors only, so each pair is visited once.
+                        if (cx + 1 < cols) linkToCell(a, grid[cy * cols + cx + 1]);
+                        if (cy + 1 < rows) {
+                            if (cx > 0) linkToCell(a, grid[(cy + 1) * cols + cx - 1]);
+                            linkToCell(a, grid[(cy + 1) * cols + cx]);
+                            if (cx + 1 < cols) linkToCell(a, grid[(cy + 1) * cols + cx + 1]);
+                        }
+                    }
+                }
+            }
+
+            if (mouseX !== null && mouseY !== null) {
+                ctx.lineWidth = 0.5;
+                for (const p of particles) {
+                    const dx = p.x - mouseX, dy = p.y - mouseY;
+                    const distSq = dx * dx + dy * dy;
+                    if (distSq < mouseLineRadiusSq) {
+                        ctx.globalAlpha = (1 - Math.sqrt(distSq) / mouseLineRadius) * 0.3;
                         ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - dist / connectionDistance) * 0.6})`;
-                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouseX, mouseY);
                         ctx.stroke();
                     }
                 }
             }
-            if (mouseX !== null && mouseY !== null) {
-                particles.forEach(p => {
-                    const dx = p.x - mouseX, dy = p.y - mouseY;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouseRadius * 1.5) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(mouseX, mouseY);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - dist / (mouseRadius * 1.5)) * 0.3})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                });
-            }
+            ctx.globalAlpha = 1;
         }
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
             particles.forEach(p => p.update());
             drawConnections();
+            ctx.fillStyle = '#fff';
             particles.forEach(p => p.draw());
+            ctx.globalAlpha = 1;
             requestAnimationFrame(animate);
         }
 
@@ -982,12 +1026,12 @@
         document.addEventListener('click', e => {
             particles.forEach(p => {
                 const dx = p.x - e.clientX, dy = p.y - e.clientY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 250) {
+                const distSq = dx * dx + dy * dy;
+                if (distSq < 250 * 250) {
+                    const dist = Math.sqrt(distSq) || 1;
                     const force = (250 - dist) / 250;
-                    const angle = Math.atan2(dy, dx);
-                    p.vx += Math.cos(angle) * force * 6;
-                    p.vy += Math.sin(angle) * force * 6;
+                    p.vx += (dx / dist) * force * 6;
+                    p.vy += (dy / dist) * force * 6;
                 }
             });
         });
